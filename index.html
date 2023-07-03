@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Sorting Using Column</title>
+
+    <script src="../angular.js"></script>
+    <link href="../bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js"></script>
+</head>
+<body ng-app="myapp" ng-controller="myctrl">
+
+    <h1>Enter Value in Table</h1>
+
+    <div class="row">
+        <div class="container">
+            <form ng-submit="toAdd()">
+                <table>
+                    <tr>
+                        <td>Name</td>
+                        <td><input type="text" class="hello" placeholder="Enter name here...." ng-model="txtname"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="text" class="hello" placeholder="Enter Email here...." ng-model="txtemail"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Date of Birth</td>
+                        <td><input type="date" class="hello" ng-model="txtdob"></td>
+                    </tr>
+                    <tr class="lastc">
+                        <td colspan="2">
+                            <input type="submit" value="Add" class="btn btn-success hellow">
+                            <input type="button" value="Delete" class="btn btn-danger hellow" ng-click="remove()">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        
+        <div class="container">
+            <table class="table table-dark table-responsive" id="bord">
+                <tr>
+                    <th ng-click="sortData('name')">
+                        Name
+                        <div ng-class="getSortClass('name')"></div>
+                    </th>
+                    <th ng-click="sortData('email')">
+                        Email
+                        <div ng-class="getSortClass('email')"></div>
+                    </th>
+                    <th ng-click="sortData('dob')">
+                        Date of Birth
+                        <div ng-class="getSortClass('dob')"></div>
+                    </th>
+
+                    <th>Remove</th>
+                </tr>
+            
+                <tr ng-repeat="x in employeeList | orderBy: sortCol:reverseSort">
+                    <td>{{x.name}}</td>
+                    <td>{{x.email}}</td>
+                    <!-- <td>{{x.dob | date: "dd-mm-yyyy"}}</td> directly filtererd date -->
+                    <td>{{x.dob}}</td>
+                    <td>
+                        <input type="checkbox" ng-model="x.done">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
